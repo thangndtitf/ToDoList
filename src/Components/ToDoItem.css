@@ -1,0 +1,11 @@
+.toDoItem{
+    opacity: 1;
+    font-family: 'Times New Roman', Times, serif;
+    color: rebeccapurple;
+}
+
+.toDoItem_Done{
+    opacity: .3;
+    text-decoration: line-through;
+    font-family: 'Times New Roman', Times, serif;
+}
