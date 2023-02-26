@@ -6,12 +6,16 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      newItem: "",
       items: [
         { title: "Di choi", isactive: false },
         { title: "Di hoc", isactive: true },
         { title: "Di lam", isactive: true },
       ],
     };
+
+    this.onKeyUp = this.onKeyUp.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   onItemClick(item) {
@@ -34,8 +38,31 @@ class App extends Component {
   }
 
   onKeyUp(event) {
-    console.log(event);
+    let text = event.target.value;
+    if (event.keyCode === 13) {
+      console.log(event.target.value);
+
+      if (!text) {
+        return;
+      }
+      text = text.trim();
+      if (!text) {
+        return;
+      }
+
+      this.setState({
+        newItem: "",
+        items: [{ title: text, isactive: false }, ...this.state.items],
+      });
+    }
   }
+
+  onChange(event) {
+    this.setState({
+      newItem: event.target.value,
+    });
+  }
+
   render() {
     console.log(this.state.items);
     if (ToDoItem.length) {
@@ -46,6 +73,8 @@ class App extends Component {
             <input
               type="text"
               placeholder="Nhan vao thu xem "
+              value={this.state.newItem}
+              onChange={this.onChange}
               onKeyUp={this.onKeyUp}
             ></input>
           </div>
