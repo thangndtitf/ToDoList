@@ -1,5 +1,8 @@
 .App {
-  text-align: center;
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #BEBEBE; 
 }
 
 .App-logo {
@@ -35,4 +38,26 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.App .Header{
+  padding: 10px 5px;
+  display: flex;
+  border-bottom: 1px solid #EEE;
+}
+
+
+.App .Header input{
+  font-family: 'Times New Roman', Times, serif;
+  color: rebeccapurple;
+  font-size: 24px;
+  font-weight: 300; 
+  padding-left: 10px ;
+  width: 100%;
+  border: none;
+}
+
+.App .Header input:focus{
+  outline: none;
+
 }

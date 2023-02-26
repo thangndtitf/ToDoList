@@ -2,10 +2,26 @@
     opacity: 1;
     font-family: 'Times New Roman', Times, serif;
     color: rebeccapurple;
+    font-size: 24px;
+    font-weight: 300; 
+    border-bottom: 1px solid #EEE ;
+    padding: 10px 5px;
+    display: flex;
+    
 }
 
-.toDoItem_Done{
+.todoItem:last-child{
+    border-bottom: none;
+
+}
+
+.toDoItem > p {
+    margin: 0;
+    padding-left: 10px;
+}
+
+.toDoItem_Done  > p  {
     opacity: .3;
     text-decoration: line-through;
-    font-family: 'Times New Roman', Times, serif;
+    
 }
