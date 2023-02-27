@@ -2,6 +2,8 @@ import "./App.css";
 import { Component } from "react";
 import ToDoItem from "./Components/ToDoItem";
 import downArrow from "../src/img/downArrow.png";
+import Page404 from "./Page404";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -65,6 +67,7 @@ class App extends Component {
 
   render() {
     console.log(this.state.items);
+    console.log("Lengt của ToDo nè : ", ToDoItem.length);
     if (ToDoItem.length) {
       return (
         <div className="App">
@@ -87,6 +90,8 @@ class App extends Component {
           ))}
         </div>
       );
+    } else {
+      return <Page404 />;
     }
   }
 }
