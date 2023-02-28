@@ -3,6 +3,7 @@ import classNames from "classnames";
 import "./ToDoItem.css";
 import checkIcon from "../img/check.png";
 import checkIconDone from "../img/check-done.png";
+
 class ToDoItem extends Component {
   constructor(props) {
     super(props);

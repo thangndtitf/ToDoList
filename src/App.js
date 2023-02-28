@@ -3,7 +3,7 @@ import { Component } from "react";
 import ToDoItem from "./Components/ToDoItem";
 import downArrow from "../src/img/downArrow.png";
 import Page404 from "./Page404";
-
+import Accordion from "./Components/Accordion/Accordion";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -18,6 +18,7 @@ class App extends Component {
 
     this.onKeyUp = this.onKeyUp.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.onAddNewItemButton = this.onAddNewItemButton.bind(this);
   }
 
   onItemClick(item) {
@@ -59,6 +60,15 @@ class App extends Component {
     }
   }
 
+  onAddNewItemButton(event) {
+    let text = event.target.value;
+    console.log("EnventTarget ne", text);
+    this.setState({
+      newItem: "",
+      items: [{ title: text, isactive: false }, ...this.state.items],
+    });
+  }
+
   onChange(event) {
     this.setState({
       newItem: event.target.value,
@@ -81,6 +91,9 @@ class App extends Component {
               onKeyUp={this.onKeyUp}
             ></input>
           </div>
+          <button className="InsertButton" onClick={this.onAddNewItemButton}>
+            Add
+          </button>
           {this.state.items.map((item, index) => (
             <ToDoItem
               item={item}
@@ -88,6 +101,9 @@ class App extends Component {
               onClick={this.onItemClick(item)}
             />
           ))}
+          <Accordion heading="Heading">
+            Dang test cai children cua prop ne
+          </Accordion>
         </div>
       );
     } else {
