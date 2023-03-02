@@ -1,5 +1,7 @@
 import { Component } from "react";
 import classNames from "classnames";
+import PropTypes from "prop-types";
+
 import "./ToDoItem.css";
 import checkIcon from "../img/check.png";
 import checkIconDone from "../img/check-done.png";
@@ -30,5 +32,14 @@ class ToDoItem extends Component {
     );
   }
 }
+
+// Sử dụng propTypes để config các giá trị của thuộc tính trong Component
+ToDoItem.propTypes = {
+  item: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    isactive: PropTypes.bool,
+  }),
+  onClick: PropTypes.func,
+};
 
 export default ToDoItem;

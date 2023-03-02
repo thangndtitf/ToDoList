@@ -1,5 +1,5 @@
 import "./App.css";
-import { Component } from "react";
+import React, { Component } from "react";
 import ToDoItem from "./Components/ToDoItem";
 import downArrow from "../src/img/downArrow.png";
 import Page404 from "./Page404";
@@ -14,15 +14,21 @@ class App extends Component {
         { title: "Di hoc", isactive: true },
         { title: "Di lam", isactive: true },
       ],
+      isCollapsed: true,
     };
-
+    this.elementInput = React.createRef();
     this.onKeyUp = this.onKeyUp.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onAddNewItemButton = this.onAddNewItemButton.bind(this);
+    this.viewMorderToDoItem = this.viewMorderToDoItem.bind(this);
+  }
+
+  componentDidMount() {
+    this.elementInput.current.focus();
   }
 
   onItemClick(item) {
-    return (event) => {
+    return () => {
       console.log(item);
       const { items } = this.state;
       const isactive = item.isactive;
@@ -60,18 +66,31 @@ class App extends Component {
     }
   }
 
-  onAddNewItemButton(event) {
-    let text = event.target.value;
-    console.log("EnventTarget ne", text);
-    this.setState({
-      newItem: "",
-      items: [{ title: text, isactive: false }, ...this.state.items],
-    });
+  onAddNewItemButton() {
+    let text = this.state.newItem;
+    console.log("EnventTarget ne", this.state.newItem);
+    if (!text) {
+      return;
+    }
+    if (!text.trim()) {
+      return;
+    } else {
+      this.setState({
+        newItem: "",
+        items: [{ title: text, isactive: false }, ...this.state.items],
+      });
+    }
   }
 
   onChange(event) {
     this.setState({
       newItem: event.target.value,
+    });
+  }
+
+  viewMorderToDoItem() {
+    this.setState({
+      isCollapsed: !this.state.isCollapsed,
     });
   }
 
@@ -89,18 +108,23 @@ class App extends Component {
               value={this.state.newItem}
               onChange={this.onChange}
               onKeyUp={this.onKeyUp}
+              ref={this.elementInput}
             ></input>
           </div>
           <button className="InsertButton" onClick={this.onAddNewItemButton}>
             Add
           </button>
-          {this.state.items.map((item, index) => (
-            <ToDoItem
-              item={item}
-              key={index}
-              onClick={this.onItemClick(item)}
-            />
-          ))}
+          <button className="ViewMoreButton" onClick={this.viewMorderToDoItem}>
+            View All List ToDoItem
+          </button>
+          {!this.state.isCollapsed &&
+            this.state.items.map((item, index) => (
+              <ToDoItem
+                item={item}
+                key={index}
+                onClick={this.onItemClick(item)}
+              />
+            ))}
           <Accordion heading="Heading">
             Dang test cai children cua prop ne
           </Accordion>
